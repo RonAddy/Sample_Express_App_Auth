@@ -4,7 +4,9 @@
   "description": "Sample express app using sessions",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -29,6 +31,7 @@
     "express": "^4.16.3",
     "method-override": "^2.3.10",
     "morgan": "^1.9.0",
+    "nodemon": "^1.17.3",
     "path": "^0.12.7"
   }
 }
