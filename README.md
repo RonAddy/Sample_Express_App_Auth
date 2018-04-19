@@ -1,2 +1,3 @@
-# Sample_Express_App_Auth
-Express App built with sessions
+# Sample Express App 
+
+Express App built with sessions and bycrpt for authentication
