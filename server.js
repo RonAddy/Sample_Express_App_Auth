@@ -39,6 +39,9 @@ app.get('/', (req, res) => {
     res.render('index');
 })
 
+app.listen(PORT,()=> {
+  console.log(`Server up and listening on port ${PORT}`);
+})
 //render a json object for any route not defined by app
 app.use("*", (err,req, res) => {
     res.status(400).json({
