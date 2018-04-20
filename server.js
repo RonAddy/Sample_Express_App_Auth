@@ -39,23 +39,25 @@ app.get('/', (req, res) => {
     res.render('index');
 })
 
-app.listen(PORT,()=> {
-  console.log(`Server up and listening on port ${PORT}`);
-})
-//render a json object for any route not defined by app
-app.use("*", (err,req, res) => {
+app.use("*", (err,req, res, next) => {
     res.status(400).json({
       error: err,
       message: err.message
     })
 })
 
-//render json object for server errors
-app.use((err, req, res) => {
+// render json object for server errors
+app.use((err, req, res,next) => {
     console.log(err)
     res.status(500).json({
       error: err,
       message: err.message
     })
   })
+
+app.listen(PORT,()=> {
+  console.log(`Server up and listening on port ${PORT}`);
+})
+//render a json object for any route not defined by app
+
 
