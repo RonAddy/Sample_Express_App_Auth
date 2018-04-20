@@ -8,7 +8,7 @@ function showRegisterForm(req, res) {
   };
 
 function  handleCreateUser(req, res) {
-    res.redirect('/myProfile');
+    res.redirect('/users/profile');
 };
 
 function handleLogout(req, res) {

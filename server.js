@@ -1,44 +1,57 @@
-//allow us to access .env variables
+//allow us to access .env variables. Will be use to retrieve secret key for sessions
 require('dotenv').config()
 
-//import our dependencies
+
 const express = require('express');
 const logger = require('morgan');
 const path = require('path');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 
-//setup our port #
+//importing the authRouter into the app
+const authRouter = require('./services/auth/AuthRouter')
+
+
 const PORT = process.env.PORT || 3000;
 
-//initialize our app
+
 const app = express();
 
-//allow morgan to log information on each request to the server
 app.use(logger('dev'));
 
-//middleware needed to properly parse the body of requests
+// set the secret using the SERVER_SECRET key stored in the .env file
+app.set('server_secret', process.env.SERVER_SECRET);
+
+//allow app to create session for users using SERVER_SECRET key. Other options are boilerplate.
+app.use(session({
+  secret:            app.get('server_secret'),
+  resave:            false,
+  saveUninitialized: false,
+}));
+
+
+
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
-//allow app to use static assets from public directory
+
 app.use(express.static(path.join(__dirname, 'public')));
 
-//set up our view engine using ejs
-//set up app to serve views from views directory
+
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'));
 
-//allows us to make PUT and DELETE requests with a form
+
 app.use(methodOverride('_method'));
 
-// app.use('/auth', authRouter);
+app.use('/auth', authRouter);
 
-//render index view when root is hit
+
 app.get('/', (req, res) => {
     res.render('index');
 })
 
+//allow app to send a json object for routes our app does not recognize
 app.use("*", (err,req, res, next) => {
     res.status(400).json({
       error: err,

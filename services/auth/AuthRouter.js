@@ -1,4 +1,4 @@
-const authRouter = expres.Router();
+const authRouter = express.Router();
 const AuthServices = require('../auth/AuthServices');
 
 
