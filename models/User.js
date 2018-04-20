@@ -1,5 +1,3 @@
-import { create } from 'domain';
-
 const bcrypt = require('bcrypt');
 const db = require('../config/connection');
 
@@ -24,7 +22,7 @@ createUser = (user) => {
 };
 
 module.exports = {
-    findUserById,
+    findUser,
     createUser
 }
 

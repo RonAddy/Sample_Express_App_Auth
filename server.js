@@ -7,9 +7,11 @@ const logger = require('morgan');
 const path = require('path');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
-
+const session = require('express-session')
 //importing the authRouter into the app
 const authRouter = require('./services/auth/AuthRouter')
+
+const userRouter = require('./routes/user-router')
 
 
 const PORT = process.env.PORT || 3000;
@@ -30,7 +32,6 @@ app.use(session({
 }));
 
 
-
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
@@ -45,7 +46,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(methodOverride('_method'));
 
 app.use('/auth', authRouter);
-
+app.use('/users', userRouter)
 
 app.get('/', (req, res) => {
     res.render('index');
