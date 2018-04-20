@@ -1,13 +1,26 @@
+import { create } from 'domain';
+
+const bcrypt = require('bcrypt');
 const db = require('../config/connection');
 
-const User = {};
 
-User.findById(id){
-    db.one(`
+findUserById = (id) =>{
+    const queryPromise = db.one(`
         SELECT * 
-        FROM 
-    
-    
-    
-    `)
-}
+        FROM users
+        WHERE id = $1  
+        `, id)
+    return queryPromise;
+};
+
+createUser = (user) => {
+    const queryPromise = db.one(`
+    INSERT INTO users (uname, email, password_digest)
+    VALUES ($/uname/, $/email/, $/password_digest/)
+    RETURNING *
+    `, user
+  );
+  return queryPromise;
+};
+
+
