@@ -4,12 +4,12 @@ const bcrypt = require('bcrypt');
 const db = require('../config/connection');
 
 
-findUserById = (id) =>{
+findUser = (uname) =>{
     const queryPromise = db.one(`
         SELECT * 
         FROM users
-        WHERE id = $1  
-        `, id)
+        WHERE  uname = $1
+        `, uname)
     return queryPromise;
 };
 
@@ -23,4 +23,8 @@ createUser = (user) => {
   return queryPromise;
 };
 
+module.exports = {
+    findUserById,
+    createUser
+}
 
