@@ -2,19 +2,19 @@ const bcrypt = require('bcrypt');
 const db = require('../config/connection');
 
 
-findUser = (uname) =>{
+const findByUsername = (username) =>{
     const queryPromise = db.one(`
         SELECT * 
         FROM users
-        WHERE  uname = $1
-        `, uname)
+        WHERE  username = $1
+        `, username)
     return queryPromise;
 };
 
-createUser = (user) => {
+const createUser = (user) => {
     const queryPromise = db.one(`
-    INSERT INTO users (uname, email, password_digest)
-    VALUES ($/uname/, $/email/, $/password_digest/)
+    INSERT INTO users (username, email, password_digest)
+    VALUES ($/username/, $/email/, $/password_digest/)
     RETURNING *
     `, user
   );
@@ -22,7 +22,7 @@ createUser = (user) => {
 };
 
 module.exports = {
-    findUser,
+    findByUsername,
     createUser
 }
 

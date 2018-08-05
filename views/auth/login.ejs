@@ -1,10 +1,20 @@
 <% include ../partials/boilerplate %>
 
+<h1>Login!!</h1>
+
+<% if (messages.length) { %>
+  <ul class="errors">
+  <% messages.forEach(message => { %>
+    <li><%= message %></li>  
+  <% }); %>
+  </ul>
+<% } %>
+
 <section class="movie-container">
   <form method="POST" action="/auth/login">
     <div class="field">
       <p class="control has-icons-left has-icons-right">
-        <input class="input" type="text" placeholder="username" name="uname">
+        <input class="input" type="text" placeholder="username" name="username">
         <span class="icon is-small is-left">
           <i class="fas fa-envelope"></i>
         </span>
